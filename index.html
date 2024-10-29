@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSONStorage App</title>
+</head>
+<body>
+  <h1>JSONStorage App</h1>
+  
+  <div>
+    <label for="data">Dados (JSON):</label>
+    <textarea id="data" rows="6" cols="30" placeholder='{"key": "value"}'></textarea>
+  </div>
+  
+  <button onclick="saveData()">Salvar Dados</button>
+  <button onclick="retrieveData()">Recuperar Dados</button>
+
+  <h2>Resultado:</h2>
+  <pre id="result"></pre>
+
+  <script src="app.js"></script>
+</body>
+</html>
