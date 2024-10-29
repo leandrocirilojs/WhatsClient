@@ -1,13 +1,7 @@
-// Função para validar JSON
-function isValidJson(jsonString) {
-  try {
-    JSON.parse(jsonString);
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
+const API_URL = "https://jsonstorage.net/api/items";
+let storageId = "";  // Armazena o ID do JSON criado, inicializado como uma string vazia
 
+// Função para salvar os dados JSON
 async function saveData() {
   const dataInput = document.getElementById("data").value;
 
@@ -42,5 +36,37 @@ async function saveData() {
   } catch (error) {
     console.error(error);
     document.getElementById("result").innerText = `Erro ao salvar dados: ${error.message}`;
+  }
+}
+
+// Função para recuperar os dados JSON
+async function retrieveData() {
+  if (!storageId) {
+    document.getElementById("result").innerText = "Nenhum dado salvo ainda!";
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_URL}/${storageId}`, {
+      method: "GET"
+    });
+
+    if (!response.ok) throw new Error("Erro ao recuperar dados");
+
+    const result = await response.json();
+    document.getElementById("result").innerText = JSON.stringify(result, null, 2);
+  } catch (error) {
+    console.error(error);
+    document.getElementById("result").innerText = "Erro ao recuperar dados!";
+  }
+}
+
+// Função para validar JSON
+function isValidJson(jsonString) {
+  try {
+    JSON.parse(jsonString);
+    return true;
+  } catch (e) {
+    return false;
   }
 }
